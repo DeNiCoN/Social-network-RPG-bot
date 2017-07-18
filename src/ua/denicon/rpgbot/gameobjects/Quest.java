@@ -2,7 +2,7 @@ package ua.denicon.rpgbot.gameobjects;
 
 public class Quest {
     private String name, lore;
-    private int level, exp, time, commonChange, uncommonChange, rareChange, epicChange, legendaryChange;
+    private int level, exp, time, commonChange, uncommonChange, rareChange, epicChange, legendaryChange, nothingChange;
 
     public String getName() {
         return name;
@@ -84,6 +84,14 @@ public class Quest {
         this.legendaryChange = legendaryChange;
     }
 
+    public int getNothingChange() {
+        return nothingChange;
+    }
+
+    public void setNothingChange(int nothingChange) {
+        this.nothingChange = nothingChange;
+    }
+
     @Override
     public String toString() {
         return "Quest{" +
@@ -97,6 +105,7 @@ public class Quest {
                 ", rareChange=" + rareChange +
                 ", epicChange=" + epicChange +
                 ", legendaryChange=" + legendaryChange +
+                ", nothingChange=" + nothingChange +
                 '}';
     }
 }

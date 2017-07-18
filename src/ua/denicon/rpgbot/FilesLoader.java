@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -32,16 +33,10 @@ public class FilesLoader {
     public void load() {
         if (Files.notExists(Paths.get(File.separator + "Rpgconfig"))) {
             try {
-                System.out.println("Creating directory: " + File.separator + "Rpgconfig" + File.separator +"Items");
-                Files.createDirectories(Paths.get(File.separator + "Rpgconfig" + File.separator +"Items"));
-                System.out.println("Creating directory: " + File.separator + "Rpgconfig" + File.separator +"Texts");
-                Files.createDirectories(Paths.get(File.separator + "Rpgconfig" + File.separator +"Texts"));
-                System.out.println("Creating directory: " + File.separator + "Rpgconfig" + File.separator +"Quests");
-                Files.createDirectories(Paths.get(File.separator + "Rpgconfig" + File.separator +"Quests"));
-                System.out.println("Creating directory: " + File.separator + "Rpgconfig" + File.separator +"Players");
-                Files.createDirectories(Paths.get(File.separator + "Rpgconfig" + File.separator +"Players"));
-                System.out.println("Creating : " + File.separator + "Rpgconfig" + File.separator +"config.yml");
-                Files.createFile(Paths.get(File.separator + "Rpgconfig" + File.separator +"config.yml"));
+                createDirectories(File.separator + "Rpgconfig");
+                createConfigFile(Paths.get(File.separator + "Rpgconfig" + File.separator +"config.yml"));
+                createTextConfigFile(Paths.get(File.separator + "Rpgconfig" + File.separator + "Texts" + File.separator + "textConfig.yml"));
+                createCommandConfigFile(Paths.get(File.separator + "Rpgconfig" + File.separator +"commands.yml"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -97,5 +92,40 @@ public class FilesLoader {
             e.printStackTrace();
         }
         return object;
+    }
+
+    private void createTextConfigFile(Path pathToFile) throws IOException {
+        System.out.println("Creating : " + pathToFile);
+        Files.createFile(pathToFile);
+        Yaml yaml = new Yaml();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("help", "");
+    }
+
+    private void createConfigFile(Path pathToFile) throws IOException {
+        System.out.println("Creating : " + pathToFile);
+        Files.createFile(pathToFile);
+        Yaml yaml = new Yaml();
+        HashMap<String, String> map = new HashMap<>();
+        map.put("commandStart", ".");
+        map.put("host", "");
+        map.put("port", "");
+        yaml.dump(map, new FileWriter(pathToFile.toFile()));
+    }
+
+    private void createCommandConfigFile(Path pathToFile) throws IOException {
+        System.out.println("Creating : " + pathToFile);
+        Files.createFile(pathToFile);
+    }
+
+    private  void createDirectories(String pathToRootDirectory) throws IOException {
+        System.out.println("Creating directory: " + pathToRootDirectory + File.separator +"Items");
+        Files.createDirectories(Paths.get(pathToRootDirectory + File.separator +"Items"));
+        System.out.println("Creating directory: " + pathToRootDirectory + File.separator +"Texts");
+        Files.createDirectories(Paths.get(pathToRootDirectory + File.separator +"Texts"));
+        System.out.println("Creating directory: " + pathToRootDirectory + File.separator +"Quests");
+        Files.createDirectories(Paths.get(pathToRootDirectory + File.separator +"Quests"));
+        System.out.println("Creating directory: " + pathToRootDirectory + File.separator +"Players");
+        Files.createDirectories(Paths.get(pathToRootDirectory + File.separator +"Players"));
     }
 }
