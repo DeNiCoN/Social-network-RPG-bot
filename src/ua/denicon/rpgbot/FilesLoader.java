@@ -1,6 +1,8 @@
 package ua.denicon.rpgbot;
 
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.nodes.Tag;
 import ua.denicon.rpgbot.gameobjects.Quest;
 import ua.denicon.rpgbot.gameobjects.inventory.Inventory;
 import ua.denicon.rpgbot.gameobjects.inventory.Item;
@@ -110,7 +112,7 @@ public class FilesLoader {
         map.put("commandStart", ".");
         map.put("host", "");
         map.put("port", "");
-        yaml.dump(map, new FileWriter(pathToFile.toFile()));
+        yaml.dump(yaml.dumpAsMap(map), new FileWriter(pathToFile.toFile()));
     }
 
     private void createCommandConfigFile(Path pathToFile) throws IOException {
