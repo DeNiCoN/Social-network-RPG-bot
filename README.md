@@ -1,2 +1,2 @@
-# TeamSpeak-Text-RPG-Bot
-TeamSpeak 3 text RPG bot
+# Social network RPG bot
+Social network text RPG bot
